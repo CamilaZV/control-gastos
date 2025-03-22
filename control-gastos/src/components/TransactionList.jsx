@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { TransactionContext } from '../context/TransactionContext';
 
 function TransactionList() {
@@ -42,24 +42,15 @@ function TransactionList() {
 
       {/* Filtro de transacciones */}
       <div className="mb-3 text-center">
-        <button
-          className="btn btn-outline-primary mx-1"
-          onClick={() => setFilter('all')}
+        <select
+          className="form-select-sm"
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
         >
-          Todas
-        </button>
-        <button
-          className="btn btn-outline-success mx-1"
-          onClick={() => setFilter('income')}
-        >
-          Ingresos
-        </button>
-        <button
-          className="btn btn-outline-danger mx-1"
-          onClick={() => setFilter('expense')}
-        >
-          Gastos
-        </button>
+          <option defaultValue={'all'}>Todas</option>
+          <option value={'income'}>Ingresos</option>
+          <option value={'expense'}>Gastos</option>
+        </select>
       </div>
 
       <ul className="list-group">
@@ -114,7 +105,9 @@ function TransactionList() {
                       ✏️
                     </button>
                     <button
-                      onClick={() => dispatch({ type: 'DELETE_TRANSACTION', payload: tx.id })}
+                      onClick={() =>
+                        dispatch({ type: 'DELETE_TRANSACTION', payload: tx.id })
+                      }
                       className="btn btn-danger btn-sm"
                     >
                       🗑️
