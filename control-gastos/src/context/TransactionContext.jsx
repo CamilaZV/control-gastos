@@ -17,12 +17,20 @@ function transactionReducer(state, action) {
     case 'DELETE_TRANSACTION':
       return {
         ...state,
-        transactions: state.transactions.filter((tx) => tx.id !== action.payload)};
+        transactions: state.transactions.filter(
+          (tx) => tx.id !== action.payload
+        ),
+      };
+
+    case "EDIT_TRANSACTION": // Nuevo caso
+      return {...state,
+        transactions: state.transactions.map(tx => tx.id === action.payload.id ? action.payload : tx)
+      }
 
     default:
       return state;
   }
-};
+}
 
 // Crear el contexto
 export const TransactionContext = createContext();
@@ -43,3 +51,4 @@ export const TransactionProvider = ({ children }) => {
     </TransactionContext.Provider>
   );
 };
+
