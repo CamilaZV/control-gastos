@@ -5,6 +5,7 @@ function TransactionForm() {
   const { dispatch } = useContext(TransactionContext);
   const [name, setName] = useState('');
   const [amount, setAmount] = useState('');
+  const [type, setType] = useState('ingreso');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -51,6 +52,17 @@ function TransactionForm() {
             onChange={(e) => setAmount(e.target.value)}
           />
         </div>
+        <div className="mb-3">
+                  <label className="form-label">Tipo: </label>
+                  <select
+                    className="form-select"
+                    value={type}
+                    onChange={(e) => setType(e.target.value)}
+                  >
+                    <option value="ingreso">Ingreso</option>
+                    <option value="gasto">Gasto</option>
+                  </select>
+                </div>
         <button type="submit" className="btn btn-primary w-100">
           Agregar
         </button>
